@@ -32,30 +32,37 @@ function toggleStyle(id) {
 
 
 
-    // adding gray bg for all
-    allBtn.classList.remove('bg-black', 'text-white');
-    interviewBtn.classList.remove('bg-black', 'text-white');
-    rejectedBtn.classList.remove('bg-black', 'text-white');
+    
+  allBtn.classList.remove('bg-blue-500', 'text-white');
+  interviewBtn.classList.remove('bg-blue-500', 'text-white');
+  rejectedBtn.classList.remove('bg-blue-500', 'text-white');
 
+  
+  allBtn.classList.add('bg-white', 'text-black');
+  interviewBtn.classList.add('bg-white', 'text-black');
+  rejectedBtn.classList.add('bg-white', 'text-black');
 
-    // if any button has black then remove
-    allBtn.classList.add('bg-gray-300', 'text-black');
-    interviewBtn.classList.add('bg-gray-300', 'text-black');
-    rejectedBtn.classList.add('bg-gray-300', 'text-black');
+  const select = document.getElementById(id);
+  currentStatus = id;
 
-
-    const select = document.getElementById(id);
-    currentStatus = id
-
-    // adding black bg for current button
-    select.classList.remove('bg-gray-300', 'text-black');
-    select.classList.add('bg-black', 'text-white')
+  
+  select.classList.remove('bg-white', 'text-black');
+  select.classList.add('bg-blue-500', 'text-white');
 
     if (id === 'interview-btn') {
+
         allcardSection.classList.add('hidden');
         filterSection.classList.remove('hidden');
-        console.log('interview');
-        interviewRender()
+
+        if (!interviewList.length) {
+            filterSection.innerHTML = `  <div class="flex flex-col items-center text-center">
+        <img class="p-3" src="./image/data.png" alt="">
+        <h2 class=" p-3 text-5xl font-bold text-[#002c5c]">No jobs available</h2>
+        <p class=" p-3 text-4xl">Check back soon for new job opportunities</p>
+    </div>`;
+        } else {
+            interviewRender();
+        }
 
 
     } else if (id == 'all-btn') {
@@ -67,8 +74,19 @@ function toggleStyle(id) {
     } else if (id == 'rejected-btn') {
         allcardSection.classList.add('hidden');
         filterSection.classList.remove('hidden');
-        console.log('Click rejected ');
-        rejectedRender()
+
+        if (!rejectedList.length) {
+            filterSection.innerHTML = `  <div class="flex flex-col items-center text-center">
+        <img class="p-3" src="./image/data.png" alt="">
+        <h2 class=" p-3 text-5xl font-bold text-[#002c5c]">No jobs available</h2>
+        <p class=" p-3 text-4xl">Check back soon for new job opportunities</p>
+    </div>`;
+        } else {
+            rejectedRender()
+        }
+
+       console.log('Click rejected ');
+
 
     }
 
