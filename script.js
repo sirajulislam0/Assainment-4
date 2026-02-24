@@ -12,13 +12,30 @@ const allBtn = document.getElementById('all-btn');
 const interviewBtn = document.getElementById('interview-btn');
 const rejectedBtn = document.getElementById('rejected-btn');
 const filterSection = document.getElementById('filtered-section');
-const deleteBtn = document.getElementById('delete-btn')
+
 
 
 
 const allcardSection = document.getElementById('allCards');
 const mainContainer = document.querySelector('main');
 
+const deleteBtn = document.querySelectorAll('.delete-btn')
+
+
+// deleteBtn.forEach((btn) => {
+//     btn.addEventListener('click', (event) => {
+
+
+//         const card = event.target.closest('.card').parentNode;
+//         card.remove();
+
+//         calculateCounts();
+
+//         console.log(allcardSection.children.length);
+
+
+//     });
+// });
 
 function calculateCounts() {
     total.innerText = allcardSection.children.length;
@@ -32,22 +49,22 @@ function toggleStyle(id) {
 
 
 
-    
-  allBtn.classList.remove('bg-blue-500', 'text-white');
-  interviewBtn.classList.remove('bg-blue-500', 'text-white');
-  rejectedBtn.classList.remove('bg-blue-500', 'text-white');
+    allBtn.classList.remove('bg-blue-500', 'text-white');
+    interviewBtn.classList.remove('bg-blue-500', 'text-white');
+    rejectedBtn.classList.remove('bg-blue-500', 'text-white');
 
-  
-  allBtn.classList.add('bg-white', 'text-black');
-  interviewBtn.classList.add('bg-white', 'text-black');
-  rejectedBtn.classList.add('bg-white', 'text-black');
 
-  const select = document.getElementById(id);
-  currentStatus = id;
+    allBtn.classList.add('bg-white', 'text-black');
+    interviewBtn.classList.add('bg-white', 'text-black');
+    rejectedBtn.classList.add('bg-white', 'text-black');
 
-  
-  select.classList.remove('bg-white', 'text-black');
-  select.classList.add('bg-blue-500', 'text-white');
+    const select = document.getElementById(id);
+    currentStatus = id;
+
+
+    select.classList.remove('bg-white', 'text-black');
+    select.classList.add('bg-blue-500', 'text-white');
+
 
     if (id === 'interview-btn') {
 
@@ -85,7 +102,7 @@ function toggleStyle(id) {
             rejectedRender()
         }
 
-       console.log('Click rejected ');
+        console.log('Click rejected ');
 
 
     }
@@ -184,6 +201,15 @@ mainContainer.addEventListener('click', function (event) {
         // rejectedRender()
         calculateCounts()
 
+    } 
+    else if (event.target.classList.contains('delete-btn')) {
+        console.log("delete");
+
+        const card = event.target.closest('.card').parentNode;
+        card.remove();
+        
+        
+        calculateCounts();
     }
 
 
@@ -234,11 +260,11 @@ function interviewRender() {
                         </div>
                     </div>
 
-                      <div id="delete-btn"
-                        class=" w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center">
+                      <div 
+                        class="delete-btn  w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center">
 
                         <!-- Trash Icon -->
-                        <i class="  fa-solid fa-trash text-gray-600 "></i>
+                        <i class="pointer-events-none fa-solid fa-trash text-gray-600 "></i>
 
                     </div>
         `;
@@ -290,11 +316,11 @@ function rejectedRender() {
                         </div>
                     </div>
 
-                       <div id="delete-btn"
-                        class=" w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center">
+                       <div 
+                        class="delete-btn  w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center">
 
                         <!-- Trash Icon -->
-                        <i class="  fa-solid fa-trash text-gray-600 "></i>
+                        <i class=" pointer-events-none  fa-solid fa-trash text-gray-600 "></i>
 
                     </div>
         `;
