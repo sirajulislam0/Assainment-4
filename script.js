@@ -4,7 +4,7 @@ let rejectedList = [];
 let currentStatus = 'all';
 
 let total = document.getElementById('total');
-let inverviewcount = document.getElementById('inverview-count');
+let inetView = document.getElementById('inverview-count');
 let rejectedCount = document.getElementById('rejected-count');
 let jobCount = document.getElementById('job-count');
 
@@ -22,37 +22,21 @@ const mainContainer = document.querySelector('main');
 const deleteBtn = document.querySelectorAll('.delete-btn')
 
 
-// deleteBtn.forEach((btn) => {
-//     btn.addEventListener('click', (event) => {
 
-
-//         const card = event.target.closest('.card').parentNode;
-//         card.remove();
-
-//         calculateCounts();
-
-//         console.log(allcardSection.children.length);
-
-
-//     });
-// });
 
 function calculateCounts() {
     total.innerText = allcardSection.children.length;
     jobCount.innerText = allcardSection.children.length
-    inverviewcount.innerText = interviewList.length;
+    inetView.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
 }
 calculateCounts();
 
 function toggleStyle(id) {
 
-
-
     allBtn.classList.remove('bg-blue-500', 'text-white');
     interviewBtn.classList.remove('bg-blue-500', 'text-white');
     rejectedBtn.classList.remove('bg-blue-500', 'text-white');
-
 
     allBtn.classList.add('bg-white', 'text-black');
     interviewBtn.classList.add('bg-white', 'text-black');
@@ -60,7 +44,6 @@ function toggleStyle(id) {
 
     const select = document.getElementById(id);
     currentStatus = id;
-
 
     select.classList.remove('bg-white', 'text-black');
     select.classList.add('bg-blue-500', 'text-white');
@@ -156,7 +139,15 @@ mainContainer.addEventListener('click', function (event) {
         }
         calculateCounts()
 
+calculateCounts();
 
+if (currentStatus === 'interview-btn') {
+    interviewRender();
+}
+if (currentStatus === 'rejected-btn') {
+    
+    rejectedRender();
+}
 
     } else if (event.target.classList.contains('btn-rejected')) {
 
@@ -195,23 +186,36 @@ mainContainer.addEventListener('click', function (event) {
         interviewList = interviewList.filter(item => item.jobCompany != cardinfo.jobCompany);
 
         if (currentStatus == 'bnt-interview') {
+            
             interviewRender()
         }
 
         // rejectedRender()
         calculateCounts()
 
-    } 
-    else if (event.target.classList.contains('delete-btn')) {
-        console.log("delete");
-
-        const card = event.target.closest('.card').parentNode;
-        card.remove();
-        
-        
-        calculateCounts();
     }
 
+
+    else if  (event.target.classList.contains('delete-btn')) {
+
+    const card = event.target.closest('.card');
+    const companyName = card.querySelector('.jobCompany').innerText.trim();
+
+    // interview list থেকে remove
+    interviewList = interviewList.filter(item =>
+        item.jobCompany.trim() !== companyName
+    );
+
+    // rejected list থেকেও remove
+    rejectedList = rejectedList.filter(item =>
+        item.jobCompany.trim() !== companyName
+    );
+
+    // DOM থেকেও remove
+    card.remove();
+
+    calculateCounts();
+}
 
 
 })
