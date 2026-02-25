@@ -1,0 +1,4 @@
+1.getElementById finds an element by its id. And the id will be unique.getElementsByClassName finds all elements of a specific class.querySelector / querySelectorAll Selects elements using CSS selector.
+2.Event Bubbling is the process of sending events from a child element to a parent element. This can be delegated by setting a listener on the parent element for the same event. This can be stopped by using .stopPropagation().
+3.Event Delegation is the method of controlling the events of its child elements by setting an event listener on a parent element. That is, instead of setting a separate listener on each child element, setting a listener on the parent to handle all the events of the child. This is usually used for click, keypress, mouse events, etc.
+4.preventDefault() It stops the default behavior of the event.stopPropagation() It stops the bubbling or capturing of the event.
